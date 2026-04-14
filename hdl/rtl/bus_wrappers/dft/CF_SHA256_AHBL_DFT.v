@@ -1,7 +1,7 @@
 /*
-	Copyright 2024 Efabless Corp.
+	Copyright 2024 ChipFoundry Corp.
 
-	Author: Efabless Corp. (ip_admin@efabless.com)
+	Author: ChipFoundry Corp. (ip_admin@chipfoundry.com)
 
 	Licensed under the Apache License, Version 2.0 (the "License");
 	you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@
 `timescale 1ns / 1ps
 `default_nettype none
 
-module EF_SHA256_AHBL (
+module CF_SHA256_AHBL (
 
     input  wire        HCLK,
     input  wire        HRESETn,
@@ -73,7 +73,7 @@ module EF_SHA256_AHBL (
   wire clk_g;
 
   wire clk_gated_en = sc_testmode ? 1'b1 : GCLK_REG[0];
-  ef_util_gating_cell clk_gate_cell (
+  cf_util_gating_cell clk_gate_cell (
 
       // USE_POWER_PINS
       .clk(HCLK),

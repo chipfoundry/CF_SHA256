@@ -1,4 +1,4 @@
-# EF_SHA256
+# CF_SHA256
 
 APB, AHBL and wishbone wrappers for the SHA-256 cryptographic hash function which is implemented in Verilog in the [secworks/sha256](https://github.com/secworks/sha256) repository.
 ## The wrapped IP
@@ -10,7 +10,7 @@ APB, AHBL and wishbone wrappers for the SHA-256 cryptographic hash function whic
 
 Based on your use case, use one of the provided wrappers or create a wrapper for your system bus type. For an example of how to integrate the wishbone wrapper:
 ```verilog
-EF_SHA256_WB INST (
+CF_SHA256_WB INST (
 	.clk_i(clk_i),
 	.rst_i(rst_i),
 	.adr_i(adr_i),
@@ -31,13 +31,13 @@ This IP generates interrupts on specific events, which are described in the [Int
 
 ## Implementation example  
 
-The following table is the result for implementing the EF_SHA256 IP with different wrappers using Sky130 HD library and [OpenLane2](https://github.com/efabless/openlane2) flow.
+The following table is the result for implementing the CF_SHA256 IP with different wrappers using Sky130 HD library and [OpenLane2](https://github.com/chipfoundry/openlane2) flow.
 |Module | Number of cells | Max. freq |
 |---|---|---|
-|EF_SHA256|TBD| TBD |
-|EF_SHA256_APB|TBD|TBD|
-|EF_SHA256_AHBL|TBD|TBD|
-|EF_SHA256_WB|TBD|TBD|
+|CF_SHA256|TBD| TBD |
+|CF_SHA256_APB|TBD|TBD|
+|CF_SHA256_AHBL|TBD|TBD|
+|CF_SHA256_WB|TBD|TBD|
 ## The Programmer's Interface
 
 
@@ -63,14 +63,14 @@ The following table is the result for implementing the EF_SHA256 IP with differe
 |BLOCK13|003c|0x00000000|w|Contains the bits 447-416 of the input block value|
 |BLOCK14|0040|0x00000000|w|Contains the bits 479-448 of the input block value|
 |BLOCK15|0044|0x00000000|w|Contains the bits 512-480 of the input block value|
-|DIGEST0|0048|0x00000000|w|Contains the bits 31-0 of the input digest value|
-|DIGEST1|004c|0x00000000|w|Contains the bits 63-32 of the input digest value|
-|DIGEST2|0050|0x00000000|w|Contains the bits 95-64 of the input digest value|
-|DIGEST3|0054|0x00000000|w|Contains the bits 127-96 of the input digest value|
-|DIGEST4|0058|0x00000000|w|Contains the bits 159-128 of the input digest value|
-|DIGEST5|005c|0x00000000|w|Contains the bits 191-160 of the input digest value|
-|DIGEST6|0060|0x00000000|w|Contains the bits 223-192 of the input digest value|
-|DIGEST7|0064|0x00000000|w|Contains the bits 255-224 of the input digest value|
+|DIGEST0|0048|0x00000000|r|Contains the bits 31-0 of the digest value|
+|DIGEST1|004c|0x00000000|r|Contains the bits 63-32 of the digest value|
+|DIGEST2|0050|0x00000000|r|Contains the bits 95-64 of the digest value|
+|DIGEST3|0054|0x00000000|r|Contains the bits 127-96 of the digest value|
+|DIGEST4|0058|0x00000000|r|Contains the bits 159-128 of the digest value|
+|DIGEST5|005c|0x00000000|r|Contains the bits 191-160 of the digest value|
+|DIGEST6|0060|0x00000000|r|Contains the bits 223-192 of the digest value|
+|DIGEST7|0064|0x00000000|r|Contains the bits 255-224 of the digest value|
 |IM|ff00|0x00000000|w|Interrupt Mask Register; write 1/0 to enable/disable interrupts; check the interrupt flags table for more details|
 |RIS|ff08|0x00000000|w|Raw Interrupt Status; reflects the current interrupts status;check the interrupt flags table for more details|
 |MIS|ff04|0x00000000|w|Masked Interrupt Status; On a read, this register gives the current masked status value of the corresponding interrupt. A write has no effect; check the interrupt flags table for more details|
@@ -178,44 +178,44 @@ Contains the bits 479-448 of the input block value
 Contains the bits 512-480 of the input block value
 <img src="https://svg.wavedrom.com/{reg:[{name:'BLOCK15', bits:32},{bits: 0}], config: {lanes: 2, hflip: true}} "/>
 
-### DIGEST0 Register [Offset: 0x48, mode: w]
+### DIGEST0 Register [Offset: 0x48, mode: r]
 
-Contains the bits 31-0 of the input digest value
+Contains the bits 31-0 of the digest value
 <img src="https://svg.wavedrom.com/{reg:[{name:'DIGEST0', bits:32},{bits: 0}], config: {lanes: 2, hflip: true}} "/>
 
-### DIGEST1 Register [Offset: 0x4c, mode: w]
+### DIGEST1 Register [Offset: 0x4c, mode: r]
 
-Contains the bits 63-32 of the input digest value
+Contains the bits 63-32 of the digest value
 <img src="https://svg.wavedrom.com/{reg:[{name:'DIGEST1', bits:32},{bits: 0}], config: {lanes: 2, hflip: true}} "/>
 
-### DIGEST2 Register [Offset: 0x50, mode: w]
+### DIGEST2 Register [Offset: 0x50, mode: r]
 
-Contains the bits 95-64 of the input digest value
+Contains the bits 95-64 of the digest value
 <img src="https://svg.wavedrom.com/{reg:[{name:'DIGEST2', bits:32},{bits: 0}], config: {lanes: 2, hflip: true}} "/>
 
-### DIGEST3 Register [Offset: 0x54, mode: w]
+### DIGEST3 Register [Offset: 0x54, mode: r]
 
-Contains the bits 127-96 of the input digest value
+Contains the bits 127-96 of the digest value
 <img src="https://svg.wavedrom.com/{reg:[{name:'DIGEST3', bits:32},{bits: 0}], config: {lanes: 2, hflip: true}} "/>
 
-### DIGEST4 Register [Offset: 0x58, mode: w]
+### DIGEST4 Register [Offset: 0x58, mode: r]
 
-Contains the bits 159-128 of the input digest value
+Contains the bits 159-128 of the digest value
 <img src="https://svg.wavedrom.com/{reg:[{name:'DIGEST4', bits:32},{bits: 0}], config: {lanes: 2, hflip: true}} "/>
 
-### DIGEST5 Register [Offset: 0x5c, mode: w]
+### DIGEST5 Register [Offset: 0x5c, mode: r]
 
-Contains the bits 191-160 of the input digest value
+Contains the bits 191-160 of the digest value
 <img src="https://svg.wavedrom.com/{reg:[{name:'DIGEST5', bits:32},{bits: 0}], config: {lanes: 2, hflip: true}} "/>
 
-### DIGEST6 Register [Offset: 0x60, mode: w]
+### DIGEST6 Register [Offset: 0x60, mode: r]
 
-Contains the bits 223-192 of the input digest value
+Contains the bits 223-192 of the digest value
 <img src="https://svg.wavedrom.com/{reg:[{name:'DIGEST6', bits:32},{bits: 0}], config: {lanes: 2, hflip: true}} "/>
 
-### DIGEST7 Register [Offset: 0x64, mode: w]
+### DIGEST7 Register [Offset: 0x64, mode: r]
 
-Contains the bits 255-224 of the input digest value
+Contains the bits 255-224 of the digest value
 <img src="https://svg.wavedrom.com/{reg:[{name:'DIGEST7', bits:32},{bits: 0}], config: {lanes: 2, hflip: true}} "/>
 
 ### GCLK Register [Offset: 0xff10, mode: w]
@@ -249,33 +249,33 @@ The following are the bit definitions for the interrupt registers:
 |0|VALID|1|Digest is valid|
 |1|READY|1|Ready to start|
 ### Clock Gating
-The IP includes a clock gating feature that allows selective activation and deactivation of the clock using the ``GCLK`` register. This capability is implemented through the ``ef_util_gating_cell`` module, which is part of the common modules library, [ef_util_lib.v](https://github.com/efabless/EF_IP_UTIL/blob/main/hdl/ef_util_lib.v). By default, the clock gating is disabled. To enable behavioral implmentation clock gating, only for simulation purposes, you should define the ``CLKG_GENERIC`` macro. Alternatively, define the ``CLKG_SKY130_HD`` macro if you wish to use the SKY130 HD library clock gating cell, ``sky130_fd_sc_hd__dlclkp_4``.
+The IP includes a clock gating feature that allows selective activation and deactivation of the clock using the ``GCLK`` register. This capability is implemented through the ``cf_util_gating_cell`` module, which is part of the common modules library, [cf_util_lib.v](https://github.com/chipfoundry/CF_IP_UTIL/blob/main/hdl/cf_util_lib.v). By default, the clock gating is disabled. To enable behavioral implmentation clock gating, only for simulation purposes, you should define the ``CLKG_GENERIC`` macro. Alternatively, define the ``CLKG_SKY130_HD`` macro if you wish to use the SKY130 HD library clock gating cell, ``sky130_fd_sc_hd__dlclkp_4``.
 
-**Note:** If you choose the [OpenLane2](https://github.com/efabless/openlane2) flow for implementation and would like to enable the clock gating feature, you need to add ``CLKG_SKY130_HD`` macro to the ``VERILOG_DEFINES`` configuration variable. Update OpenLane2 YAML configuration file as follows: 
+**Note:** If you choose the [OpenLane2](https://github.com/chipfoundry/openlane2) flow for implementation and would like to enable the clock gating feature, you need to add ``CLKG_SKY130_HD`` macro to the ``VERILOG_DEFINES`` configuration variable. Update OpenLane2 YAML configuration file as follows: 
 ```
 VERILOG_DEFINES:
 - CLKG_SKY130_HD
 ```
 ## Firmware Drivers:
-Firmware drivers for EF_SHA256 can be found in the [Drivers](https://github.com/efabless/EFIS/tree/main/Drivers) directory in the [EFIS](https://github.com/efabless/EFIS) (Efabless Firmware Interface Standard) repo. EF_SHA256 driver documentation  is available [here](https://github.com/efabless/EFIS/blob/main/Drivers/Docs/EF_SHA256/README.md).
-You can also find an example C application using the EF_SHA256 drivers [here](https://github.com/efabless/EFIS/tree/main/Drivers/Docs/EF_SHA256/example).
+Firmware drivers for CF_SHA256 can be found in the [Drivers](https://github.com/chipfoundry/EFIS/tree/main/Drivers) directory in the [EFIS](https://github.com/chipfoundry/EFIS) (ChipFoundry Firmware Interface Standard) repo. CF_SHA256 driver documentation  is available [here](https://github.com/chipfoundry/EFIS/blob/main/Drivers/Docs/CF_SHA256/README.md).
+You can also find an example C application using the CF_SHA256 drivers [here](https://github.com/chipfoundry/EFIS/tree/main/Drivers/Docs/CF_SHA256/example).
 ## Installation:
-You can install the IP either by cloning this repository or by using [IPM](https://github.com/efabless/IPM).
-### 1. Using [IPM](https://github.com/efabless/IPM):
-- [Optional] If you do not have IPM installed, follow the installation guide [here](https://github.com/efabless/IPM/blob/main/README.md)
-- After installing IPM, execute the following command ```ipm install EF_SHA256```.
-> **Note:** This method is recommended as it automatically installs [EF_IP_UTIL](https://github.com/efabless/EF_IP_UTIL.git) as a dependency.
+You can install the IP either by cloning this repository or by using [IPM](https://github.com/chipfoundry/IPM).
+### 1. Using [IPM](https://github.com/chipfoundry/IPM):
+- [Optional] If you do not have IPM installed, follow the installation guide [here](https://github.com/chipfoundry/IPM/blob/main/README.md)
+- After installing IPM, execute the following command ```ipm install CF_SHA256```.
+> **Note:** This method is recommended as it automatically installs [CF_IP_UTIL](https://github.com/chipfoundry/CF_IP_UTIL.git) as a dependency.
 ### 2. Cloning this repo: 
-- Clone [EF_IP_UTIL](https://github.com/efabless/EF_IP_UTIL.git) repository, which includes the required modules from the common modules library, [ef_util_lib.v](https://github.com/efabless/EF_IP_UTIL/blob/main/hdl/ef_util_lib.v).
-```git clone https://github.com/efabless/EF_IP_UTIL.git```
+- Clone [CF_IP_UTIL](https://github.com/chipfoundry/CF_IP_UTIL.git) repository, which includes the required modules from the common modules library, [cf_util_lib.v](https://github.com/chipfoundry/CF_IP_UTIL/blob/main/hdl/cf_util_lib.v).
+```git clone https://github.com/chipfoundry/CF_IP_UTIL.git```
 - Clone the IP repository
-```git clone github.com/efabless/SW_SHA256```
+```git clone github.com/chipfoundry/SW_SHA256```
 
 ### The Wrapped IP Interface 
 
 >**_NOTE:_** This section is intended for advanced users who wish to gain more information about the interface of the wrapped IP, in case they want to create their own wrappers.
 
-<img src="docs/_static/EF_SHA256.svg" width="600"/>
+<img src="docs/_static/CF_SHA256.svg" width="600"/>
 
 #### Ports 
 

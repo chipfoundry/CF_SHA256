@@ -1,7 +1,7 @@
 /*
-	Copyright 2024 Efabless Corp.
+	Copyright 2024 ChipFoundry Corp.
 
-	Author: Efabless Corp. (ip_admin@efabless.com)
+	Author: ChipFoundry Corp. (ip_admin@chipfoundry.com)
 
 	Licensed under the Apache License, Version 2.0 (the "License");
 	you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@
 
 `include			"wb_wrapper.vh"
 
-module EF_SHA256_WB (
+module CF_SHA256_WB (
 `ifdef USE_POWER_PINS
 	inout VPWR,
 	inout VGND,
@@ -69,7 +69,7 @@ module EF_SHA256_WB (
     wire clk_g;
 
     wire clk_gated_en = sc_testmode ? 1'b1 : GCLK_REG[0];
-    ef_util_gating_cell clk_gate_cell(
+    cf_util_gating_cell clk_gate_cell(
         `ifdef USE_POWER_PINS 
         .vpwr(VPWR),
         .vgnd(VGND),

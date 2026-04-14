@@ -1,12 +1,12 @@
 ---
 info:
-  name: EF_SHA256
+  name: CF_SHA256
   description: APB, AHBL and wishbone wrappers for the SHA-256 cryptographic hash function which is implemented in Verilog in the [secworks/sha256](https://github.com/secworks/sha256) repository.
-  repo: github.com/efabless/SW_SHA256
-  owner: Efabless Corp.
+  repo: github.com/chipfoundry/SW_SHA256
+  owner: ChipFoundry Corp.
   license: Apache 2.0
-  author: Efabless Corp.
-  email: ip_admin@efabless.com
+  author: ChipFoundry Corp.
+  email: ip_admin@chipfoundry.com
   version: v1.1.0
   date: 23-01-2025
   category: digital
@@ -240,68 +240,68 @@ registers:
 
 - name: DIGEST0
   size: 32
-  mode: w
+  mode: r
   fifo: no
   offset: 72
   bit_access: no
-  write_port: digest[31:0]
-  description: Contains the bits 31-0 of the input digest value
+  read_port: digest[31:0]
+  description: Contains the bits 31-0 of the digest value
 - name: DIGEST1
   size: 32
-  mode: w
+  mode: r
   fifo: no
   offset: 76
   bit_access: no
-  write_port: digest[63:32]
-  description: Contains the bits 63-32 of the input digest value
+  read_port: digest[63:32]
+  description: Contains the bits 63-32 of the digest value
 - name: DIGEST2
   size: 32
-  mode: w
+  mode: r
   fifo: no
   offset: 80
   bit_access: no
-  write_port: digest[95:64]
-  description: Contains the bits 95-64 of the input digest value
+  read_port: digest[95:64]
+  description: Contains the bits 95-64 of the digest value
 - name: DIGEST3
   size: 32
-  mode: w
+  mode: r
   fifo: no
   offset: 84
   bit_access: no
-  write_port: digest[127:96]
-  description: Contains the bits 127-96 of the input digest value
+  read_port: digest[127:96]
+  description: Contains the bits 127-96 of the digest value
 - name: DIGEST4
   size: 32
-  mode: w
+  mode: r
   fifo: no
   offset: 88
   bit_access: no
-  write_port: digest[159:128]
-  description: Contains the bits 159-128 of the input digest value
+  read_port: digest[159:128]
+  description: Contains the bits 159-128 of the digest value
 - name: DIGEST5
   size: 32
-  mode: w
+  mode: r
   fifo: no
   offset: 92
   bit_access: no
-  write_port: digest[191:160]
-  description: Contains the bits 191-160 of the input digest value
+  read_port: digest[191:160]
+  description: Contains the bits 191-160 of the digest value
 - name: DIGEST6
   size: 32
-  mode: w
+  mode: r
   fifo: no
   offset: 96
   bit_access: no
-  write_port: digest[223:192]
-  description: Contains the bits 223-192 of the input digest value
+  read_port: digest[223:192]
+  description: Contains the bits 223-192 of the digest value
 - name: DIGEST7
   size: 32
-  mode: w
+  mode: r
   fifo: no
   offset: 100
   bit_access: no
-  write_port: digest[255:224]
-  description: Contains the bits 255-224 of the input digest value
+  read_port: digest[255:224]
+  description: Contains the bits 255-224 of the digest value
 
 clock:
   name: clk

@@ -1,13 +1,5 @@
 `timescale 1ns/1ps
 
-module cf_util_gating_cell(
-    input  wire clk,
-    input  wire clk_en,
-    output wire clk_o
-);
-    assign clk_o = clk;
-endmodule
-
 module top();
     reg     CLK = 0;
     reg     RESETn = 0;

@@ -34,10 +34,29 @@ class sha256_coverage_closure_seq(sha256_base_seq):
 
     async def _mode_coverage(self):
         """Cover both SHA-224 (mode=0) and SHA-256 (mode=1) with actual hashing."""
-        await self._hash(ABC_BLOCK, mode=1, is_first=True)
+        from cocotb.triggers import ClockCycles
+
+        await self._r("status_idle", "STATUS")
+        await self._r("ris_idle", "RIS")
+
+        await self._write_block(ABC_BLOCK)
+        await self._w("ctrl_init256", "CTRL", (1 << 2) | 0x01)
+        await self._w("ctrl_clr256", "CTRL", (1 << 2))
+        await self._r("status_busy", "STATUS")
+        await ClockCycles(self.dut.CLK, 5)
+        await self._r("status_busy2", "STATUS")
+
+        for _ in range(500):
+            st = await self._r("poll_val256", "STATUS")
+            if (st >> 7) & 1:
+                break
+            await ClockCycles(self.dut.CLK, 10)
+
         await self._read_digest()
         await self._r("status_sha256", "STATUS")
         await self._r("ris_sha256", "RIS")
+
+        await self._w("ic_clr", "IC", 0x3)
 
         await self._hash(ABC_BLOCK, mode=0, is_first=True)
         await self._read_digest()

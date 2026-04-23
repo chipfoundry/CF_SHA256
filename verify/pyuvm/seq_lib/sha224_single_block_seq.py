@@ -26,10 +26,7 @@ class sha224_single_block_seq(sha256_base_seq):
         await self._r("ris", "RIS")
 
         digest_224 = digest >> 32
-        if digest_224 == EXPECTED_SHA224_ABC:
-            print(f"SHA-224('abc') PASS: 0x{digest_224:056x}")
-        else:
-            print(
-                f"SHA-224('abc') MISMATCH: "
-                f"expected 0x{EXPECTED_SHA224_ABC:056x}, got 0x{digest_224:056x}"
-            )
+        assert digest_224 == EXPECTED_SHA224_ABC, (
+            f"SHA-224('abc') MISMATCH: "
+            f"expected 0x{EXPECTED_SHA224_ABC:056x}, got 0x{digest_224:056x}"
+        )

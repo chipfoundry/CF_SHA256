@@ -26,10 +26,7 @@ class sha256_single_block_seq(sha256_base_seq):
         await self._r("status", "STATUS")
         await self._r("ris", "RIS")
 
-        if digest == EXPECTED_SHA256_ABC:
-            print(f"SHA-256('abc') PASS: 0x{digest:064x}")
-        else:
-            print(
-                f"SHA-256('abc') MISMATCH: "
-                f"expected 0x{EXPECTED_SHA256_ABC:064x}, got 0x{digest:064x}"
-            )
+        assert digest == EXPECTED_SHA256_ABC, (
+            f"SHA-256('abc') MISMATCH: "
+            f"expected 0x{EXPECTED_SHA256_ABC:064x}, got 0x{digest:064x}"
+        )

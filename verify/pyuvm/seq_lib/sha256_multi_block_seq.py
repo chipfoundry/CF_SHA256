@@ -28,10 +28,7 @@ class sha256_multi_block_seq(sha256_base_seq):
 
         await self._r("status", "STATUS")
 
-        if digest == EXPECTED:
-            print(f"SHA-256 multi-block PASS: 0x{digest:064x}")
-        else:
-            print(
-                f"SHA-256 multi-block MISMATCH: "
-                f"expected 0x{EXPECTED:064x}, got 0x{digest:064x}"
-            )
+        assert digest == EXPECTED, (
+            f"SHA-256 multi-block MISMATCH: "
+            f"expected 0x{EXPECTED:064x}, got 0x{digest:064x}"
+        )

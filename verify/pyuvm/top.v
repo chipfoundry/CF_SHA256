@@ -28,12 +28,12 @@ module top();
         wire        HRESETn  = RESETn;
         wire [31:0] HADDR;
         wire        HWRITE;
-        wire        HSEL     = 0;
+        reg         HSEL     = 0;
         wire        HREADYOUT;
-        wire [ 1:0] HTRANS   = 0;
+        reg  [ 1:0] HTRANS   = 0;
         wire [31:0] HWDATA;
         wire [31:0] HRDATA;
-        wire        HREADY;
+        reg         HREADY   = 1;
         CF_SHA256_AHBL dut(
             .HCLK(HCLK), .HRESETn(HRESETn),
             .HADDR(HADDR), .HWRITE(HWRITE), .HSEL(HSEL),
@@ -62,9 +62,15 @@ module top();
     `endif
 
 `ifndef GL
-    wire [255:0] sha_digest       = dut.instance_to_wrap.digest;
-    wire         sha_digest_valid  = dut.instance_to_wrap.digest_valid;
-    wire         sha_ready         = dut.instance_to_wrap.ready;
+    // Read H-registers directly to bypass multi-driver bug on 'digest' port
+    wire [255:0] sha_digest       = {
+        dut.instance_to_wrap.H0_reg, dut.instance_to_wrap.H1_reg,
+        dut.instance_to_wrap.H2_reg, dut.instance_to_wrap.H3_reg,
+        dut.instance_to_wrap.H4_reg, dut.instance_to_wrap.H5_reg,
+        dut.instance_to_wrap.H6_reg, dut.instance_to_wrap.H7_reg
+    };
+    wire         sha_digest_valid  = dut.instance_to_wrap.digest_valid_reg;
+    wire         sha_ready         = dut.instance_to_wrap.ready_flag;
 `else
     wire [255:0] sha_digest       = 256'b0;
     wire         sha_digest_valid  = 1'b0;

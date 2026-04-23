@@ -3,11 +3,13 @@
 from pyuvm import uvm_sequence, ConfigDB
 from cocotb.triggers import ClockCycles
 
-from cf_verify.bus_env.bus_seq_lib import write_reg_seq, read_reg_seq
+from cf_verify.bus_env.bus_seq_lib import write_reg_seq, read_reg_seq, reset_seq
 
 
 class sha256_base_seq(uvm_sequence):
     async def _init(self):
+        await reset_seq("rst").start(self.sequencer)
+
         self.regs = ConfigDB().get(None, "", "bus_regs")
         self.dut = ConfigDB().get(None, "", "DUT")
         self.addr = self.regs.reg_name_to_address
